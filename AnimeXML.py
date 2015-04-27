@@ -72,4 +72,30 @@ else:
                     value["name"] = elem.text
             if task :
                 result[task] = value
+
+        print (result)
+
+        # Extract cast data.
+        cast_results = {}
+        for cast in root.getiterator ("cast"):
+            # Initializce values.
+            role = ""
+            value = {}
+
+            for elem in cast.getchildren():
+                if elem.tag == "role" :
+                    role = elem.text
+                elif elem.tag == "person" :
+                    tmp = elem.attrib
+
+                    if "id" in tmp:
+                        value["id"] = tmp["id"]
+                    value["name"] = elem.text
+
+            if role :
+                cast_results[role] = value
+                
+        result["cast"] = cast_results
+
+        # Print data.
         print (result)
