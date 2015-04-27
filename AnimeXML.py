@@ -48,6 +48,28 @@ else:
             if ("Picture" in info.get("type")):
                 print ("Poster: " + info.get("src"))
 
-        # Extract aditional posters. 
+        # Extract aditional posters.
         for img in root.iter ("img"):
             print ("Poster: " + img.get("src"))
+
+        print ("")
+
+        # Extract all the staff of this anime.
+        result = {}
+        for staff in root.getiterator ("staff"):
+            # Initialize values.
+            task = ""
+            value = {}
+
+            for elem in staff.getchildren():
+                if elem.tag == "task" :
+                    task = elem.text
+                elif elem.tag == "person" :
+                    tmp = elem.attrib
+
+                    if "id" in tmp:
+                        value["id"] = tmp["id"]
+                    value["name"] = elem.text
+            if task :
+                result[task] = value
+        print (result)
