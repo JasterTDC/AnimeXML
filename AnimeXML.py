@@ -32,6 +32,7 @@ else:
         # Start parsing XML.
         root = ElementTree.fromstring (xmlData)
 
+        # Extract classic data.
         for info in root.iter("anime"):
             print ("Id: " + info.get("id"))
             print ("Gid: " + info.get("gid"))
@@ -39,6 +40,14 @@ else:
             print ("Precision: " + info.get("precision"))
             print ("Type: " + info.get("type"))
 
+        # Extract date and general poster.
         for info in root.iter ("info"):
             if ("Vintage" in info.get("type")):
                 print ("Date: " + info.text)
+
+            if ("Picture" in info.get("type")):
+                print ("Poster: " + info.get("src"))
+
+        # Extract aditional posters. 
+        for img in root.iter ("img"):
+            print ("Poster: " + img.get("src"))
