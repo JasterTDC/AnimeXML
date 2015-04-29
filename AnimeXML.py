@@ -34,6 +34,7 @@ else:
 
         # Extract classic data.
         print ("General information")
+        print ("---------------------")
         for info in root.iter("anime"):
             print ("Id: " + info.get("id"))
             print ("Gid: " + info.get("gid"))
@@ -55,6 +56,7 @@ else:
 
         print ("")
         print ("Staff")
+        print ("---------------------")
 
         # Extract all the staff of this anime.
         for staff in root.getiterator ("staff"):
@@ -74,6 +76,7 @@ else:
 
         print ("")
         print ("Cast")
+        print ("---------------------")
 
         # Extract cast data.
         for cast in root.getiterator ("cast"):
