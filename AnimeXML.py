@@ -33,6 +33,7 @@ else:
         root = ElementTree.fromstring (xmlData)
 
         # Extract classic data.
+        print ("General information")
         for info in root.iter("anime"):
             print ("Id: " + info.get("id"))
             print ("Gid: " + info.get("gid"))
@@ -53,9 +54,9 @@ else:
             print ("Poster: " + img.get("src"))
 
         print ("")
+        print ("Staff")
 
         # Extract all the staff of this anime.
-        result = {}
         for staff in root.getiterator ("staff"):
             # Initialize values.
             task = ""
@@ -67,16 +68,14 @@ else:
                 elif elem.tag == "person" :
                     tmp = elem.attrib
 
-                    if "id" in tmp:
-                        value["id"] = tmp["id"]
                     value["name"] = elem.text
             if task :
-                result[task] = value
+                print (task + ": " + elem.text)
 
-        print (result)
+        print ("")
+        print ("Cast")
 
         # Extract cast data.
-        cast_results = {}
         for cast in root.getiterator ("cast"):
             # Initializce values.
             role = ""
@@ -88,14 +87,7 @@ else:
                 elif elem.tag == "person" :
                     tmp = elem.attrib
 
-                    if "id" in tmp:
-                        value["id"] = tmp["id"]
                     value["name"] = elem.text
 
             if role :
-                cast_results[role] = value
-                
-        result["cast"] = cast_results
-
-        # Print data.
-        print (result)
+                print (role + ": " + elem.text)
